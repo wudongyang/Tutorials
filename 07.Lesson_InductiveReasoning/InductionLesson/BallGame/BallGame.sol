@@ -7,7 +7,7 @@ contract BallGame {
 		if (ballAt == 1)
 			ballAt = 2;
 		else if (ballAt == 2)
-			ballAt = 1;
+			ballAt = 3;
 		else if (ballAt == 3)
 			ballAt = 4;
 		else if (ballAt == 4)

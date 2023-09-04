@@ -1,7 +1,7 @@
 methods {
-	getCurrentManager(uint256 fundId) returns (address) envfree
-	getPendingManager(uint256 fundId) returns (address) envfree
-	isActiveManager(address a) returns (bool) envfree
+	function getCurrentManager(uint256 fundId) external returns (address) envfree;
+	function getPendingManager(uint256 fundId) external returns (address) envfree;
+	function isActiveManager(address a) external returns (bool) envfree;
 }
 
 
@@ -27,4 +27,4 @@ rule uniqueManagerAsRule(uint256 fundId1, uint256 fundId2, method f) {
 
 
 invariant uniqueManagerAsInvariant(uint256 fundId1, uint256 fundId2)
-	fundId1 != fundId2 => getCurrentManager(fundId1) != getCurrentManager(fundId2) 
+	fundId1 != fundId2 => getCurrentManager(fundId1) != getCurrentManager(fundId2);

@@ -16,16 +16,16 @@
 
 methods {
     // auction getters 
-    seller() returns (address)                                              envfree
-    nftId() returns (uint)                                                  envfree
-    nft() returns(address)                                                  envfree
-    endAt() returns (uint256)                                               envfree
-    started() returns (bool)                                                envfree
-    ended() returns (bool)                                                  envfree
-    highestBidder() returns (address)                                       envfree
-    highestBid() returns (uint256)                                          envfree
-    bids(address) returns (uint256)                                         envfree
-    operators(address, address) returns (bool)                              envfree
+    function seller() external returns (address)                                              envfree;
+    function nftId() external returns (uint)                                                  envfree;
+    function nft() external returns(address)                                                  envfree;
+    function endAt() external returns (uint256)                                               envfree;
+    function started() external returns (bool)                                                envfree;
+    function ended() external returns (bool)                                                  envfree;
+    function highestBidder() external returns (address)                                       envfree;
+    function highestBid() external returns (uint256)                                          envfree;
+    function bids(address) external returns (uint256)                                         envfree;
+    function operators(address, address) external returns (bool)                              envfree;
 
 
 }
@@ -34,11 +34,11 @@ methods {
 
 // check highestBidder correlation with highestBid from bids mapping
 invariant highestBidVSBids() 
-    bids( highestBidder()) == highestBid()
+    bids( highestBidder()) == highestBid();
 
 
 
 
 // Nobody can have more bids than highestBid
 invariant integrityOfHighestBid(address any) 
-    bids(any) <= highestBid() 
+    bids(any) <= highestBid();

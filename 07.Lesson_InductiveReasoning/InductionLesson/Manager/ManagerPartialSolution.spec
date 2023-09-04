@@ -1,7 +1,7 @@
 methods {
-		getCurrentManager(uint256 fundId) returns (address) envfree
-		getPendingManager(uint256 fundId) returns (address) envfree
-		isActiveManager(address a) returns (bool) envfree
+		function getCurrentManager(uint256 fundId) external returns (address) envfree;
+		function getPendingManager(uint256 fundId) external returns (address) envfree;
+		function isActiveManager(address a) external returns (bool) envfree;
 }
 
 
@@ -13,7 +13,7 @@ rule uniqueManager(uint256 fundId1, uint256 fundId2, method f) {
 	require getCurrentManager(fundId1) != getCurrentManager(fundId2) ;
 				
 	env e;
-	if (f.selector == claimManagement(uint256).selector)
+	if (f.selector == sig:claimManagement(uint256).selector)
 	{
 		uint256 id;
 		require id == fundId1 || id == fundId2;
