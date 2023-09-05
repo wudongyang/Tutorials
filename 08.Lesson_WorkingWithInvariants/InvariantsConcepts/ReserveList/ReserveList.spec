@@ -72,7 +72,7 @@ rule removeReserveChangeUnderlyingNonZero(address token, address other) {
     removeReserve(token);
 
     uint256 otherIdAfter = getIdOfToken(other);
-    uint256 otherById = getTokenAtIndex(otherIdAfter);
+    address otherById = getTokenAtIndex(otherIdAfter);
 
     assert other == otherById;
 }
