@@ -1,22 +1,22 @@
 methods {
-		getCurrentManager(uint256 fundId) returns (address) envfree
-		getPendingManager(uint256 fundId) returns (address) envfree
-		isActiveManager(address a) returns (bool) envfree
+		function getCurrentManager(uint256 fundId) external returns (address) envfree;
+		function getPendingManager(uint256 fundId) external returns (address) envfree;
+		function isActiveManager(address a) external returns (bool) envfree;
 }
 
 invariant ManagerZeroIsNotActive()
-        !isActiveManager(0)
+        !isActiveManager(0);
 
 
 invariant step0_uniqueManagerAsInvariant(uint256 fundId1, uint256 fundId2) 
-	fundId1 != fundId2 => (getCurrentManager(fundId1) != getCurrentManager(fundId2) )
+	fundId1 != fundId2 => (getCurrentManager(fundId1) != getCurrentManager(fundId2) );
 
 invariant step1_uniqueManagerAsInvariant(uint256 fundId1, uint256 fundId2) 
 	fundId1 != fundId2 => (getCurrentManager(fundId1) != getCurrentManager(fundId2) ||
-	getCurrentManager(fundId1) == 0 || getCurrentManager(fundId2) == 0  )
+	getCurrentManager(fundId1) == 0 || getCurrentManager(fundId2) == 0  );
 
 invariant step2_activeCurrentManger(uint256 fundId) 
-	getCurrentManager(fundId) != 0 => isActiveManager(getCurrentManager(fundId))
+	getCurrentManager(fundId) != 0 => isActiveManager(getCurrentManager(fundId));
 
 invariant step3_activeCurrentManger(uint256 fundId) 
 	getCurrentManager(fundId) != 0 => isActiveManager(getCurrentManager(fundId))
@@ -46,7 +46,7 @@ rule uniqueManagerAsRule(uint256 fundId1, uint256 fundId2, method f) {
 	require getCurrentManager(fundId1) != getCurrentManager(fundId2) ;
 				
 	env e;
-	if (f.selector == claimManagement(uint256).selector)
+	if (f.selector == sig:claimManagement(uint256).selector)
 	{
 		uint256 id;
 		require id == fundId1 || id == fundId2;
@@ -60,8 +60,5 @@ rule uniqueManagerAsRule(uint256 fundId1, uint256 fundId2, method f) {
 	assert getCurrentManager(fundId1) != 0 => isActiveManager(getCurrentManager(fundId1)), "manager of fund1 is not active";
 	assert getCurrentManager(fundId2) != 0 => isActiveManager(getCurrentManager(fundId2)), "manager of fund2 is not active";
 }
-
-
-
 		
 	
